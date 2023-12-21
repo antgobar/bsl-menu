@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BSL Menu</title>
+    <script src="https://unpkg.com/htmx.org@1.9.9"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-500 m-4">
+    <div>
+        <div class="mt-4">
+            <h1 class="mb-4 text-4xl font-extrabold text-gray-900">
+                <a href="{{ url_for('index')}}">BSL Menu</a>
+            </h1>
+
+            {% include 'restaurant_search_form.html' %}
+        </div>
+
+        <div class="my-2" id="search-results"></div>
+    </div>
+</body>
+</html>

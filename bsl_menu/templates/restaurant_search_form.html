@@ -1,0 +1,13 @@
+<form>
+    <input
+        type="search"
+        placeholder="Search restaurants"
+        id="search-restaurant"
+        class="rounded px-4 py-2"
+        name="name"
+        hx-get="/search"
+        hx-trigger="input changed delay:500ms, search"
+        hx-target="#search-results"
+    >
+<!--    <button class="bg-slate-700 text-gray-200 px-4 py-2 rounded" type="submit" value="Search">Go</button>-->
+</form>

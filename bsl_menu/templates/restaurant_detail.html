@@ -1,0 +1,15 @@
+<div class="bg-slate-700 rounded my-2 columns-2 gap-4">
+    <a href="{{ url_for('get_restaurant', _id=restaurant.id)}}">
+        <img class="rounded" src="{{ url_for('static', path='img/')}}" width="400" alt="" />
+    </a>
+    <div class="p-2">
+        <h1 class="font-bold text-gray-200">{{ restaurant.name }}, {{ restaurant.city }}</h1>
+        <p class="font-normal text-gray-300">{{ restaurant.description }}</p>
+    </div>
+    <div class="p-2">
+        {% for menu_item in restaurant.menu_items %}
+        <p class="font-normal text-gray-300">{{ menu_item.name }}</p>
+        <p class="font-normal text-gray-300">{{ menu_item.description }}</p>
+        {% endfor %}
+    </div>
+</div>
