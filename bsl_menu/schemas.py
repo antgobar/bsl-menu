@@ -1,21 +1,21 @@
 from pydantic import BaseModel, Field
 
 
-class CreateMenuItem(BaseModel):
+class MenuItemCreate(BaseModel):
     name: str
     description: str
     visual_id: int
 
 
-class MenuItem(CreateMenuItem):
+class MenuItem(MenuItemCreate):
     id: int
     restaurant_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
-class CreateRestaurant(BaseModel):
+class RestaurantCreate(BaseModel):
     name: str
     city: str
     category: str
@@ -25,19 +25,19 @@ class CreateRestaurant(BaseModel):
     visual_id: int | None
 
 
-class Restaurant(CreateRestaurant):
+class Restaurant(RestaurantCreate):
     id: int
     menu_items: list[MenuItem] = []
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
-class CreateVisual(BaseModel):
+class VisualCreate(BaseModel):
     name: str
     description: str
     reference_link: str
 
 
-class Visual(CreateVisual):
+class Visual(VisualCreate):
     id: int

@@ -1,7 +1,7 @@
 from sqlalchemy import Boolean, Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 
-from .database import Base
+from .database import Base, engine
 
 
 class Restaurant(Base):
@@ -34,3 +34,6 @@ class Visual(Base):
     name = Column(String, index=True)
     description = Column(String(120))
     reference_link = Column(String)
+
+
+Base.metadata.create_all(bind=engine)
