@@ -1,1 +1,1 @@
-web: uvicorn app.main:app --proxy-headers --host=0.0.0.0 --port=${PORT}
+web: uvicorn bsl_menu.main:app --proxy-headers --host=0.0.0.0 --port=${PORT}
