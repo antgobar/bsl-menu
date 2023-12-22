@@ -16,7 +16,7 @@ from . import routers
 app = FastAPI()
 app.include_router(routers.restaurants.router)
 app.include_router(routers.visuals.router)
-app.include_router(routers.menu_items.router)
+app.include_router(routers.menu.router)
 app.include_router(routers.search.router)
 
 current_directory = os.path.dirname(os.path.realpath(__file__))
@@ -54,7 +54,7 @@ async def search_restaurants(request: Request, db: DbSession, name: str):
 
 
 @app.post("/restaurants/{restaurant_id}/menu/", response_model=schemas.MenuItem)
-def post_menu_item_for_restaurant(
+def add_menu_item_to_restaurant(
     request: Request,
     db: DbSession,
     restaurant_id: int,

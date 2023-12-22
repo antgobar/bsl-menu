@@ -1,3 +1,5 @@
+from sqlalchemy.orm import joinedload
+
 from . import models, schemas
 from .database import DbSession
 
@@ -49,15 +51,29 @@ def create_restaurant(db: DbSession, restaurant: schemas.RestaurantCreate):
 
 
 def read_restaurant(db: DbSession, restaurant_id: int):
-    return read_entity(models.Restaurant, restaurant_id)
+    return db.query(
+        models.Restaurant
+    ).options(
+        joinedload(models.Restaurant.visual)
+    ).filter(models.Restaurant.id == restaurant_id).first()
 
 
 def read_restaurants(db: DbSession, skip: int = 0, limit: int = 100):
-    return read_entities(db, models.Restaurant, skip, limit)
+    return db.query(
+        models.Restaurant
+    ).options(
+        joinedload(models.Restaurant.visual)
+    ).offset(skip).limit(limit).all()
 
 
 def search_restaurants_by_name(db: DbSession, name: str, skip: int = 0, limit: int = 100):
-    return db.query(models.Restaurant).filter(models.Restaurant.name.like(f"%{name}%")).offset(skip).limit(limit).all()
+    if not name.strip() or not name:
+        return []
+    return db.query(
+        models.Restaurant
+    ).options(
+        joinedload(models.Restaurant.visual)
+    ).filter(models.Restaurant.name.like(f"%{name}%")).offset(skip).limit(limit).all()
 
 
 def remove_restaurant(db: DbSession, restaurant_id: int):

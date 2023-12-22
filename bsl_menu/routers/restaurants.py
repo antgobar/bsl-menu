@@ -13,7 +13,7 @@ async def post_restaurant(request: Request, db: DbSession, restaurant: Restauran
     return create_restaurant(db, restaurant)
 
 
-@router.get("/{_id}", response_model=Restaurant)
+@router.get("/{_id}")
 async def get_restaurant(request: Request, db: DbSession, _id: int):
     result = read_restaurant(db, _id)
     if result:
@@ -21,7 +21,7 @@ async def get_restaurant(request: Request, db: DbSession, _id: int):
     raise HTTPException(status_code=404, detail=f"restaurant with id: {_id} not found")
 
 
-@router.get("/", response_model=list[Restaurant])
+@router.get("/")
 async def get_restaurants(request: Request, db: DbSession, skip: int = 0, limit: int = 100):
     return read_restaurants(db, skip=skip, limit=limit)
 

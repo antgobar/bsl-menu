@@ -13,7 +13,9 @@ class Restaurant(Base):
     description = Column(String(120))
     year_opened = Column(Integer)
     is_active = Column(Boolean, default=True)
+
     visual_id = Column(Integer, ForeignKey("visuals.id"))
+    visual = relationship("Visual", backref="restaurants")
     menu_items = relationship("MenuItem", back_populates="restaurant")
 
 
