@@ -12,6 +12,11 @@ ENDPOINT = os.path.basename(__file__).split(".")[0]
 router = APIRouter(prefix=f"/{ENDPOINT}", tags=[ENDPOINT])
 
 
+@router.get("/register")
+async def register_restaurant_page(request: Request):
+    return templates.TemplateResponse("register.html", {"request": request})
+
+
 @router.post("/", response_model=Restaurant)
 async def post_restaurant(request: Request, db: DbSession, restaurant: RestaurantCreate):
     return create_restaurant(db, restaurant)
@@ -25,7 +30,7 @@ async def get_restaurant(request: Request, db: DbSession, _id: int):
     raise HTTPException(status_code=404, detail=f"restaurant with id: {_id} not found")
 
 
-@router.get("/")
+@router.get("/", response_class=HTMLResponse)
 async def get_restaurants(request: Request, db: DbSession, skip: int = 0, limit: int = 100):
     restaurants = read_restaurants(db, skip=skip, limit=limit)
     return templates.TemplateResponse(
