@@ -1,4 +1,5 @@
 import random
+import os
 
 from . import crud, models, schemas, database
 
@@ -15,14 +16,41 @@ YEARS_OPENED = list(range(2000, 2023))
 LOCALES = ["Pub", "Restaurant", "Bistro", "Cafe"]
 
 
-def add_dummy_data(no: int = 3):
-    db = database.SessionLocal()
+def populate_visuals(db):
+    files = os.listdir("bsl_menu/static/img")
+    all_visuals = crud.read_visuals(db, skip=0, limit=100)
+    reference_links = [visual.reference_link for visual in all_visuals]
+    for file in files:
+        filename, extension = file.split(".")
+        if extension not in ["gif", "png"]:
+            continue
+        if file in reference_links:
+            continue
+
+        schema = schemas.VisualCreate(
+            name=filename,
+            description="A nice gif here",
+            reference_link=file
+        )
+        crud.create_visual(db, schema)
+    return crud.read_visuals(db, skip=0, limit=100)
+
+
+def populate_restaurants(db, visual_ids, no=3):
+    all_restaurants = crud.read_restaurants(db)
+    if len(all_restaurants) > 15:
+        return
     for _ in range(no):
-        restaurant = dummy_restaurant(schemas)
-        results = db.query(models.Restaurant).filter(models.Restaurant.name == restaurant.name).all()
-        if len(results) == 0:
-            crud.create_restaurant(db=db, restaurant=restaurant)
+        restaurant = dummy_restaurant(visual_ids)
+        crud.create_restaurant(db=db, restaurant=restaurant)
     db.close()
+
+
+def dummy_setup():
+    db = database.SessionLocal()
+    all_visuals = populate_visuals(db)
+    visual_ids = [visual.id for visual in all_visuals]
+    populate_restaurants(db, visual_ids)
 
 
 def generate_description():
@@ -31,16 +59,16 @@ def generate_description():
     return ". ".join(lorem[:selected_length])
 
 
-def dummy_restaurant(schemas):
+def dummy_restaurant(visual_ids):
     city = random.choice(CITIES)
     category = random.choice(CUISINES)
     locale = random.choice(LOCALES)
-    return schemas.CreateRestaurant(
+    return schemas.RestaurantCreate(
         name=f"The {city} {category} {locale}",
         city=city,
         category=category,
         description=generate_description(),
         year_opened=random.choice(YEARS_OPENED),
         is_active=True,
-        visual_source_id=random.randint(1, 10)
+        visual_id=random.choice(visual_ids)
     )

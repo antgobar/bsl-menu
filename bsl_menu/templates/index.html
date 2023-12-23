@@ -12,10 +12,16 @@
             <h1 class="mb-4 text-4xl font-extrabold text-gray-900">
                 <a href="{{ url_for('index')}}">BSL Menu</a>
             </h1>
-            {% include 'restaurant_search_form.html' %}
         </div>
-
-        <div class="my-2" id="search-results"></div>
+        <button
+            class="bg-blue-700 hover:bg-blue-600 text-gray-200 hover:text-slate-800 px-4 py-2 my-2 rounded"
+            hx-get="/restaurants?limit=4&skip=0"
+            hx-target="#main-content"
+        >Restaurants</button>
+        <button class="bg-blue-700 hover:bg-blue-600 text-gray-200 hover:text-slate-800 px-4 py-2 my-2 rounded">Visuals</button>
+        <button class="bg-green-700 hover:bg-green-600 text-gray-200 hover:text-slate-800 px-4 py-2 my-2 rounded">Register your Restaurant!</button>
+        <div class="my-2" id="main-content"></div>
+        {% include 'restaurant_search_form.html' %}
     </div>
 </body>
 </html>

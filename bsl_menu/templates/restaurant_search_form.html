@@ -5,9 +5,10 @@
         id="search-restaurant"
         class="rounded px-4 py-2"
         name="name"
-        hx-get="/search"
+        hx-get="/search?skip=0&limit=5"
         hx-trigger="input changed delay:500ms, search"
         hx-target="#search-results"
     >
 <!--    <button class="bg-slate-700 text-gray-200 px-4 py-2 rounded" type="submit" value="Search">Go</button>-->
 </form>
+<div class="my-2" id="search-results"></div>

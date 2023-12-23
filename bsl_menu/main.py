@@ -4,14 +4,13 @@ from typing import Annotated
 from fastapi import FastAPI, Request, Form, Depends, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
 from fastapi.responses import FileResponse
 
 from . import crud, schemas
 from .database import DbSession
-from .dummy_setup import add_dummy_data
+from .dummy_setup import dummy_setup
 from . import routers
-
+from .templates import templates
 
 app = FastAPI()
 app.include_router(routers.restaurants.router)
@@ -22,7 +21,6 @@ app.include_router(routers.search.router)
 current_directory = os.path.dirname(os.path.realpath(__file__))
 static_files = StaticFiles(directory=os.path.join(current_directory, "static"))
 app.mount("/static", static_files, name="static")
-templates = Jinja2Templates(directory=os.path.join(current_directory, "templates"))
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -34,9 +32,9 @@ async def index(request: Request, db: DbSession):
     )
 
 
-def on_startup():
-    # add_dummy_data()
-    pass
+@app.on_event("startup")
+async def startup_event():
+    dummy_setup()
 
 
 @app.get("/favicon.ico", include_in_schema=False)
@@ -44,12 +42,17 @@ async def get_favicon():
     return FileResponse("bsl_menu/static/img/favicon.ico")
 
 
-@app.get("/search")
-async def search_restaurants(request: Request, db: DbSession, name: str):
-    restaurants = crud.search_restaurants_by_name(db, name=name, limit=20)
+@app.get("/search", response_class=HTMLResponse)
+async def search_restaurants(request: Request, db: DbSession, name: str, skip: int, limit: int):
+    restaurants = crud.search_restaurants_by_name(db, name=name, skip=skip, limit=limit)
     return templates.TemplateResponse(
         "restaurants.html",
-        {"request": request, "restaurants": restaurants, "headers": request.headers}
+        {
+            "request": request,
+            "restaurants": restaurants,
+            "headers": request.headers,
+            "skip": skip, "limit": limit, "endpoint": "restaurants"
+        }
     )
 
 

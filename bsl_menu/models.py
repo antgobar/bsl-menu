@@ -14,7 +14,7 @@ class Restaurant(Base):
     year_opened = Column(Integer)
     is_active = Column(Boolean, default=True)
 
-    visual_id = Column(Integer, ForeignKey("visuals.id"))
+    visual_id = Column(Integer, ForeignKey("visuals.id"), nullable=True, default=None)
     visual = relationship("Visual", backref="restaurants")
     menu_items = relationship("MenuItem", back_populates="restaurant")
 
@@ -35,7 +35,7 @@ class Visual(Base):
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String, index=True)
     description = Column(String(120))
-    reference_link = Column(String)
+    reference_link = Column(String, unique=True)
 
 
 Base.metadata.create_all(bind=engine)

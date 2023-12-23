@@ -1,11 +1,15 @@
-from fastapi import APIRouter, Request, HTTPException
+import os
 
+from fastapi import APIRouter, Request, HTTPException, Depends
+from fastapi.responses import HTMLResponse
+
+from bsl_menu.templates import templates
 from bsl_menu.schemas import Restaurant, RestaurantCreate
 from bsl_menu.crud import create_restaurant, read_restaurant, read_restaurants, remove_restaurant
 from bsl_menu.database import DbSession
 
-
-router = APIRouter(prefix="/restaurants", tags=["restaurants"])
+ENDPOINT = os.path.basename(__file__).split(".")[0]
+router = APIRouter(prefix=f"/{ENDPOINT}", tags=[ENDPOINT])
 
 
 @router.post("/", response_model=Restaurant)
@@ -23,7 +27,15 @@ async def get_restaurant(request: Request, db: DbSession, _id: int):
 
 @router.get("/")
 async def get_restaurants(request: Request, db: DbSession, skip: int = 0, limit: int = 100):
-    return read_restaurants(db, skip=skip, limit=limit)
+    restaurants = read_restaurants(db, skip=skip, limit=limit)
+    return templates.TemplateResponse(
+        "restaurants.html",
+        {
+            "request": request,
+            "restaurants": restaurants,
+            "skip": skip, "limit": limit, "endpoint": ENDPOINT
+        }
+    )
 
 
 @router.delete("/{_id}", response_model=Restaurant)

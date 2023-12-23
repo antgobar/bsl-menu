@@ -1,0 +1,10 @@
+<button
+    class="bg-blue-700 hover:bg-blue-600 text-gray-200 hover:text-slate-800 px-4 py-2 my-2 rounded"
+    hx-get="/{{ endpoint }}?limit={{ limit }}&skip={{ skip - limit}}"
+    hx-target="#main-content"
+>&larr; Previous</button>
+<button
+    class="bg-blue-700 hover:bg-blue-600 text-gray-200 hover:text-slate-800 px-4 py-2 my-2 rounded"
+    hx-get="/{{ endpoint }}?limit={{ limit }}&skip={{ skip + limit}}"
+    hx-target="#main-content"
+>Next &rarr;</button>

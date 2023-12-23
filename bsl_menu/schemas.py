@@ -22,7 +22,7 @@ class RestaurantCreate(BaseModel):
     description: str
     year_opened: int = Field(gt=0, description="Year must be greater than 0")
     is_active: bool
-    visual_id: int | None
+    visual_id: int | None = None
 
 
 class Restaurant(RestaurantCreate):

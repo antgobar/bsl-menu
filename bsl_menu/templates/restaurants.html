@@ -1,3 +1,8 @@
-{% for restaurant in restaurants %}
-    {% include 'restaurant_detail.html' %}
-{% endfor %}
+{% if restaurants %}
+    {% for restaurant in restaurants %}
+        {% include 'restaurant_detail.html' %}
+    {% endfor %}
+{% else %}
+    No more restaurants to show <br>
+{% endif %}
+{% include 'pagination.html' %}
