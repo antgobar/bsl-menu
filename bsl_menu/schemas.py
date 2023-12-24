@@ -1,14 +1,28 @@
+from typing import Optional
+
 from pydantic import BaseModel, Field
+
+
+class VisualCreate(BaseModel):
+    name: str
+    description: str
+    reference_link: str
+
+
+class Visual(VisualCreate):
+    id: int
 
 
 class MenuItemCreate(BaseModel):
     name: str
+    category: str
     description: str
-    visual_id: int
+    visual_id: Optional[int] = 1
 
 
 class MenuItem(MenuItemCreate):
     id: int
+    visual: Visual = {}
     restaurant_id: int
 
     class Config:
@@ -20,24 +34,15 @@ class RestaurantCreate(BaseModel):
     city: str
     category: str
     description: str
-    year_opened: int = Field(gt=0, description="Year must be greater than 0")
-    is_active: bool
-    visual_id: int | None = None
+    year_opened: int = Field(gt=0, description="Year must be greater than 0", default=1)
+    visual_id: Optional[int] = 1
 
 
 class Restaurant(RestaurantCreate):
     id: int
-    menu_items: list[MenuItem] = []
+    is_active: bool
+    menu_items: Optional[list[MenuItem]] = []
+    visual: Optional[Visual] = {}
 
     class Config:
         from_attributes = True
-
-
-class VisualCreate(BaseModel):
-    name: str
-    description: str
-    reference_link: str
-
-
-class Visual(VisualCreate):
-    id: int

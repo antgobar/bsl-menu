@@ -1,5 +1,3 @@
-from sqlalchemy.orm import joinedload
-
 from . import models, schemas
 from .database import DbSession
 
@@ -43,27 +41,15 @@ def delete_entity(db: DbSession, model, entity_id: int):
 
 
 def create_restaurant(db: DbSession, restaurant: schemas.RestaurantCreate):
-    db_restaurant = models.Restaurant(**restaurant.model_dump())
-    db.add(db_restaurant)
-    db.commit()
-    db.refresh(db_restaurant)
-    return db_restaurant
+    return create_entity(db, models.Restaurant, restaurant)
 
 
 def read_restaurant(db: DbSession, restaurant_id: int):
-    return db.query(
-        models.Restaurant
-    ).options(
-        joinedload(models.Restaurant.visual)
-    ).filter(models.Restaurant.id == restaurant_id).first()
+    return read_entity(db, models.Restaurant, restaurant_id)
 
 
 def read_restaurants(db: DbSession, skip: int = 0, limit: int = 100):
-    return db.query(
-        models.Restaurant
-    ).options(
-        joinedload(models.Restaurant.visual)
-    ).offset(skip).limit(limit).all()
+    return read_entities(db, models.Restaurant, skip, limit)
 
 
 def search_restaurants_by_name(db: DbSession, name: str, skip: int = 0, limit: int = 100):
@@ -71,8 +57,6 @@ def search_restaurants_by_name(db: DbSession, name: str, skip: int = 0, limit: i
         return []
     return db.query(
         models.Restaurant
-    ).options(
-        joinedload(models.Restaurant.visual)
     ).filter(models.Restaurant.name.like(f"%{name}%")).offset(skip).limit(limit).all()
 
 
@@ -89,7 +73,7 @@ def create_restaurant_menu_item(db: DbSession, menu_item: schemas.MenuItemCreate
 
 
 def read_menu_item(db: DbSession, menu_item_id: int):
-    return db.query(models.MenuItem).filter(models.MenuItem.id == menu_item_id).first()
+    return read_entity(db, models.MenuItem, menu_item_id)
 
 
 def read_restaurant_menu(db: DbSession, restaurant_id: int):

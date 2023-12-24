@@ -12,7 +12,6 @@ voluptatibus."""
 CITIES = ["Leeds", "London", "Liverpool", "Leciestair", "Lincon"]
 CUISINES = ["Pub Grub", "Seafood", "Vegan", "American", "Pasta"]
 YEARS_OPENED = list(range(2000, 2023))
-# VISUAL_SOURCES = ["sl-burgerking.gif", "sl-fish.gif", "sl-pasta.gif", "sl-vegetarian.gif"]
 LOCALES = ["Pub", "Restaurant", "Bistro", "Cafe"]
 
 
@@ -47,10 +46,11 @@ def populate_restaurants(db, visual_ids, no=3):
 
 
 def dummy_setup():
-    db = database.SessionLocal()
-    all_visuals = populate_visuals(db)
-    visual_ids = [visual.id for visual in all_visuals]
-    populate_restaurants(db, visual_ids)
+    # db = database.SessionLocal()
+    # all_visuals = populate_visuals(db)
+    # visual_ids = [visual.id for visual in all_visuals]
+    # populate_restaurants(db, visual_ids)
+    pass
 
 
 def generate_description():

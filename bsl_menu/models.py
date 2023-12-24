@@ -14,20 +14,25 @@ class Restaurant(Base):
     year_opened = Column(Integer)
     is_active = Column(Boolean, default=True)
 
-    visual_id = Column(Integer, ForeignKey("visuals.id"), nullable=True, default=None)
+    visual_id = Column(Integer, ForeignKey("visuals.id"), nullable=True)
     visual = relationship("Visual", backref="restaurants")
-    menu_items = relationship("MenuItem", back_populates="restaurant")
+
+    # menu_items = relationship("MenuItem", back_populates="restaurant")
+    menu_items = relationship("MenuItem", backref="restaurant")
 
 
 class MenuItem(Base):
     __tablename__ = "menu_items"
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String, index=True)
+    category = Column(String(20))
     description = Column(String(120))
-    visual_id = Column(Integer, ForeignKey("visuals.id"))
+
+    visual_id = Column(Integer, ForeignKey("visuals.id"), nullable=True)
+    visual = relationship("Visual", backref="menu_items")
 
     restaurant_id = Column(Integer, ForeignKey("restaurants.id"))
-    restaurant = relationship("Restaurant", back_populates="menu_items")
+    # restaurant = relationship("Restaurant", back_populates="menu_items")
 
 
 class Visual(Base):

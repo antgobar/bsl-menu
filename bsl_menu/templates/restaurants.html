@@ -1,8 +1,10 @@
 {% if restaurants %}
     {% for restaurant in restaurants %}
-        {% include 'restaurant_detail.html' %}
+        {% include 'restaurant.html' %}
     {% endfor %}
 {% else %}
-    No more restaurants to show <br>
+<div class="px-4 py-2 my-2 rounded text-gray-200 bg-teal-600 max-w-max">
+    No restaurants to show
+</div>
 {% endif %}
 {% include 'pagination.html' %}
