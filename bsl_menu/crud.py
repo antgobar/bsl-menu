@@ -26,7 +26,7 @@ def update_entity(db: DbSession, model, entity_id: int, **field_values):
     db_entity = db.query(model).filter(model.id == entity_id).first()
     if db_entity:
         for field, value in field_values.items():
-            db_entity[field] = value
+            db_entity.__dict__[field] = value
         db.commit()
         db.refresh(db_entity)
     return db_entity
@@ -90,6 +90,14 @@ def read_visual(db: DbSession, visual_id: int):
 
 def read_visuals(db: DbSession, skip, limit):
     return read_entities(db, models.Visual, skip=skip, limit=limit)
+
+
+def update_visual_reference_link(db: DbSession, visual_id: int, reference_link: str):
+    visual = read_visual(db, visual_id)
+    visual.reference_link = reference_link
+    db.commit()
+    db.refresh(visual)
+    return visual
 
 
 def remove_visual(db: DbSession, visual_id: int):

@@ -1,7 +1,9 @@
 {% if restaurants %}
     {% for restaurant in restaurants %}
-        {% include 'restaurant.html' %}
+        {% include 'restaurant_tile.html' %}
     {% endfor %}
+
+
 {% else %}
 <div class="px-4 py-2 my-2 rounded text-gray-200 bg-teal-600 max-w-max">
     No restaurants to show

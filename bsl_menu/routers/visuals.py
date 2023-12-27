@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Request, HTTPException
 
 from bsl_menu.schemas import Visual, VisualCreate
-from bsl_menu.crud import create_visual, read_visual, read_visuals, remove_visual
+from bsl_menu.crud import create_visual, read_visual, read_visuals, remove_visual, update_visual_reference_link
 from bsl_menu.database import DbSession
 
 
@@ -24,6 +24,13 @@ async def get_visual(request: Request, db: DbSession, _id: int):
 @router.get("/", response_model=list[Visual])
 async def get_visual(request: Request, db: DbSession, skip: int = 0, limit: int = 100):
     return read_visuals(db, skip=skip, limit=limit)
+
+
+@router.patch("/{_id}", response_model=Visual)
+async def patch_visual_reference_id(request: Request, db: DbSession, _id: int, reference_link: str):
+    return update_visual_reference_link(
+        db, _id, reference_link
+    )
 
 
 @router.delete("/{_id}", response_model=Visual)
