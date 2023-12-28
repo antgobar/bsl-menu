@@ -1,5 +1,6 @@
 from typing import Optional
 
+from fastapi import Form
 from pydantic import BaseModel, Field
 
 
@@ -36,6 +37,25 @@ class RestaurantCreate(BaseModel):
     description: str
     year_opened: int = Field(gt=0, description="Year must be greater than 0", default=1)
     visual_id: Optional[int] = None
+
+    @classmethod
+    def as_form(
+        cls,
+        name: str = Form(...),
+        city: str = Form(...),
+        category: str = Form(...),
+        description: str = Form(...),
+        year_opened: int = Form(...),
+        visual_id: int = Form(...),
+    ):
+        return cls(
+            name=name,
+            city=city,
+            category=category,
+            description=description,
+            year_opened=year_opened,
+            visual_id=visual_id
+        )
 
 
 class Restaurant(RestaurantCreate):

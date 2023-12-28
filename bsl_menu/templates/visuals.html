@@ -1,22 +1,5 @@
-<div class="columns-2 gap-4">
-    {% for visual in visuals %}
-    <div class="rounded bg-orange-500 my-2">
-        <label for="visual-radio-select" class="ms-2 text-sm font-medium text-gray-900">
-            <input
-                id="visual-radio-select"
-                type="radio"
-                value="{{ visual.id }}"
-                name="{{ loop.counter }}"
-                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600"
-            >
-            <img
-                class="rounded gap-x-2"
-                src="{{ url_for('static', path='img/' + visual.reference_link | default('not-found.png'))}}"
-                width="200"
-                alt="{{ visual.name }}"
-            />
-        </label>
-
-    </div>
-    {% endfor %}
+<div class="border rounded grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-10 md:px-20">
+{% for visual in visuals %}
+    {% include 'visual_tile_radio.html' %}
+{% endfor %}
 </div>

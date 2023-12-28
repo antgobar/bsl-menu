@@ -52,7 +52,7 @@ async def delete_visual(request: Request, db: DbSession, _id: int):
 
 @router.get("/search/", response_class=HTMLResponse)
 async def search_visuals_by_name_view(request: Request, db: DbSession, name: str):
-    visuals = search_visual_by_name(db, name, limit=10)
+    visuals = search_visual_by_name(db, name, limit=3)
     return templates.TemplateResponse(
         "visuals.html",
         {

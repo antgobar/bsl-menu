@@ -1,0 +1,15 @@
+<div class="border rounded shadow-md my-2">
+    <input
+        id="visual-radio-select"
+        type="radio"
+        value="{{ visual.id }}"
+        name="visual_id"
+    required>
+    <label for="visual-radio-select" class="relative">
+        Select {{ visual.name }}
+    </label>
+    <img
+        class="w-96 h-full"
+        src="{{ url_for('static', path='img/' + visual.reference_link | default('not-found.png'))}}"
+        alt="{{ visual.name }}"/>
+</div>

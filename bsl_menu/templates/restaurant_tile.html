@@ -1,15 +1,11 @@
-<div class="bg-slate-700 rounded my-2 max-w-max">
-    <div class="p-2">
-        <p class="font-bold text-gray-200">{{ restaurant.name }}</p>
-        <p class="font-bold text-gray-100">{{ restaurant.city }}</p>
-    </div>
-    <div>
+<div class="border rounded shadow-md overflow-hidden">
+    <div class="relative">
         <a href="{{ url_for('get_restaurant', _id=restaurant.id)}}">
-        <img
-            src="{{ url_for('static', path='img/' + restaurant.visual.reference_link | default('not-found.png'))}}"
-            width="300"
-            alt="{{ restaurant.visual.description }}"
-            class="rounded"/>
+            <img class="w-96 h-full object-cover" src="{{ url_for('static', path='img/' + restaurant.visual.reference_link | default('not-found.png'))}}">
         </a>
+    </div>
+    <div class="p-4">
+        <div class="text-lg font-medium mb-2">{{ restaurant.name }}</div>
+        <p class="text-sm">{{ restaurant.city }}</p>
     </div>
 </div>

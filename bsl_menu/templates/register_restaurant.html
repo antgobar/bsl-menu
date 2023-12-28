@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method="POST" enctype="multipart/form-data">
+    <h1 class="my-2">Register your restaurant!</h1>
+    <div class="grid grid-cols-1 gap-4">
+        <input class="border rounded max-w-96 px-4 py-2" type="text" id="name" name="name" placeholder="Restaurant Name" required>
+
+        <input class="border rounded max-w-96 px-4 py-2" type="text" id="city" name="city" placeholder="City" required>
+
+        <input class="border rounded max-w-96 px-4 py-2" type="text" id="category" name="category" placeholder="Category" required>
+
+        <textarea rows="4" class="border rounded max-w-96 px-4 py-2 block" name="description" placeholder="Describe your restaurant..." required></textarea>
+
+        <label class=" max-w-96" for="restaurant-date-opened">Date opened</label>
+<!--        <input-->
+<!--            class="border rounded px-2 py-2 max-w-96 cursor-pointer"-->
+<!--            type="date" id="restaurant-date-opened" name="year_opened"-->
+<!--        />-->
+        <input
+            class="border rounded px-2 py-2 max-w-96 cursor-pointer"
+            type="number" id="restaurant-date-opened" name="year_opened" required>
+
+        <h1>Select visual</h1>
+        <div class="columns-2 ">
+             <button
+                class="border rounded max-w-96 hover:bg-green-600 px-4 py-2"
+                hx-get="{{ url_for ('visuals_search_form') }}"
+                hx-target="#visual-selection-form"
+            >From collection</button>
+
+            <button disabled
+                class="border rounded max-w-96 px-4 py-2 line-through"
+                hx-get="{{ url_for ('visual_upload_form') }}"
+                hx-target="#visual-selection-form"
+            >Upload your own</button>
+        </div>
+
+        <div id="visual-selection-form"></div>
+
+        <button
+            type="submit"
+            class="border rounded max-w-24 hover:bg-green-600 px-4 py-2 my-2">
+            Register
+        </button>
+    </div>
+</form>
+{% endblock %}

@@ -1,6 +1,6 @@
 import os
 
-from fastapi import APIRouter, Request, HTTPException
+from fastapi import APIRouter, Request, HTTPException, Depends
 from fastapi.responses import HTMLResponse
 
 from bsl_menu.templates import templates
@@ -22,7 +22,21 @@ router = APIRouter(prefix=f"/{ENDPOINT}", tags=[ENDPOINT])
 
 @router.get("/register")
 async def register_restaurant_page(request: Request):
-    return templates.TemplateResponse("register.html", {"request": request})
+    return templates.TemplateResponse("register_restaurant.html", {"request": request})
+
+
+@router.post('/register', response_class=HTMLResponse)
+def register_restaurant_post(
+        request: Request,
+        db: DbSession,
+        restaurant: RestaurantCreate = Depends(RestaurantCreate.as_form)
+):
+    created_restaurant = create_restaurant(db, restaurant)
+    categories = list(set([item.category for item in created_restaurant.menu_items]))
+    return templates.TemplateResponse(
+        "restaurant_detail.html",
+        {"request": request, "restaurant": created_restaurant, "categories": categories}
+    )
 
 
 @router.post("/", response_model=Restaurant)
@@ -33,9 +47,10 @@ async def post_restaurant(request: Request, db: DbSession, restaurant: Restauran
 @router.get("/{_id}", response_class=HTMLResponse)
 async def get_restaurant(request: Request, db: DbSession, _id: int):
     restaurant = read_restaurant(db, _id)
+    categories = list(set([item.category for item in restaurant.menu_items]))
     return templates.TemplateResponse(
         "restaurant_detail.html",
-        {"request": request, "restaurant": restaurant}
+        {"request": request, "restaurant": restaurant, "categories": categories}
     )
 
 

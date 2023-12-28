@@ -7,14 +7,27 @@
     <script src="https://unpkg.com/htmx.org@1.9.9"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-500 m-4">
-    <div class="mt-4 bg-teal-600 p-4 rounded inline-block">
-        <h1 class="text-4xl font-extrabold text-gray-900">
-            <a href="{{ url_for('index')}}">BSL Menu</a>
-        </h1>
-        Accessible menu for BSL users
+<body class="bg-blue-400">
+    <div class="bg-blue-200 p-4">
+
+        <nav class="flex items-center gap-2">
+            <div class="border rounded text-4xl font-extrabold p-4 inline-block">
+                <a href="{{ url_for('index')}}">BSL Menu</a>
+            </div>
+            <div class="border rounded hover:bg-blue-600 px-4 py-2 my-2">
+                <a href="{{ url_for('get_restaurants') }}?skip=0&limit=10">
+                    View Restaurants
+                </a>
+            </div>
+            <div class="border rounded hover:bg-green-600 px-4 py-2 my-2">
+                <a href="{{ url_for('register_restaurant_page') }}">
+                    Register
+                </a>
+            </div>
+        </nav>
+        <p>Accessible menu for BSL users</p>
     </div>
-    <div id="content">
+    <div id="main-content" class="m-2 p-2">
         {% block content %}
         {% endblock %}
     </div>
