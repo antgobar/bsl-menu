@@ -1,1 +1,15 @@
 {% extends "base.html" %}
+{% block content %}
+<div class="text-lg px-2 py-2 my-2 bg-green-400 rounded">
+    <h1>
+        {{ restaurant.name }}
+    </h1>
+</div>
+<div>
+    {% for menu_item in restaurant.menu_items %}
+    <ul>
+        {% include 'menu_item_tile.html' %}
+    </ul>
+    {% endfor %}
+</div>
+{% endblock %}

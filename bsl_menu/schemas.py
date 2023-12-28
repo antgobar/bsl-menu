@@ -17,7 +17,7 @@ class MenuItemCreate(BaseModel):
     name: str
     category: str
     description: str
-    visual_id: Optional[int] = 1
+    visual_id: Optional[int] = None
 
 
 class MenuItem(MenuItemCreate):
@@ -35,7 +35,7 @@ class RestaurantCreate(BaseModel):
     category: str
     description: str
     year_opened: int = Field(gt=0, description="Year must be greater than 0", default=1)
-    visual_id: Optional[int] = 1
+    visual_id: Optional[int] = None
 
 
 class Restaurant(RestaurantCreate):

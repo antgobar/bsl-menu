@@ -1,0 +1,11 @@
+<div class="carousel rounded-box">
+    {% for visual in visuals %}
+    <div class="carousel-item my-2 rounded">
+        <img
+        src="{{ url_for('static', path='img/' + visual.reference_link | default('not-found.png'))}}"
+        width="300"
+        alt="{{ visual.name }}"
+        />
+    </div>
+    {% endfor %}
+</div>

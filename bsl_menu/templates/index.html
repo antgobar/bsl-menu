@@ -1,34 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>BSL Menu</title>
-    <script src="https://unpkg.com/htmx.org@1.9.9"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-slate-500 m-4">
-    <div>
-        <div class="mt-4">
-            <h1 class="mb-4 text-4xl font-extrabold text-gray-900">
-                <a href="{{ url_for('index')}}">BSL Menu</a>
-            </h1>
-        </div>
-        <button
-            class="bg-blue-700 hover:bg-blue-600 text-gray-200 hover:text-slate-800 px-4 py-2 my-2 rounded"
-            hx-get="/restaurants?limit=4&skip=0"
-            hx-target="#main-content"
-        >Restaurants</button>
-        <button
-            class="bg-blue-700 hover:bg-blue-600 text-gray-200 hover:text-slate-800 px-4 py-2 my-2 rounded">
-            Visuals
-        </button>
-        <button
-            class="bg-green-700 hover:bg-green-600 text-gray-200 hover:text-slate-800 px-4 py-2 my-2 rounded"
-            hx-get="/restaurants/register"
-            hx-target="#main-content"
-        >Register your Restaurant!
-        </button>
-        <div class="my-2" id="main-content"></div>
-    </div>
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+<button
+    class="bg-blue-700 hover:bg-blue-600 text-gray-200 hover:text-slate-800 px-4 py-2 my-2 rounded"
+    hx-get="/restaurants?limit=4&skip=0"
+    hx-target="#main-content"
+>Restaurants</button>
+<button
+    class="bg-blue-700 hover:bg-blue-600 text-gray-200 hover:text-slate-800 px-4 py-2 my-2 rounded"
+    hx-get="/visuals/search/?name=bur"
+    hx-target="#main-content"
+>Visuals</button>
+<button
+    class="bg-green-700 hover:bg-green-600 text-gray-200 hover:text-slate-800 px-4 py-2 my-2 rounded"
+    hx-get="/restaurants/register"
+    hx-target="#main-content"
+>Register your Restaurant!
+</button>
+<div class="my-2" id="main-content"></div>
+{% endblock %}}

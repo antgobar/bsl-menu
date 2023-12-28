@@ -102,3 +102,11 @@ def update_visual_reference_link(db: DbSession, visual_id: int, reference_link: 
 
 def remove_visual(db: DbSession, visual_id: int):
     return delete_entity(db, models.Visual, visual_id)
+
+
+def search_visual_by_name(db: DbSession, name: str, skip: int = 0, limit: int = 100):
+    if not name.strip() or not name:
+        return []
+    return db.query(
+        models.Visual
+    ).filter(models.Visual.name.like(f"%{name}%")).offset(skip).limit(limit).all()

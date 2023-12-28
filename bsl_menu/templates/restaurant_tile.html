@@ -6,7 +6,7 @@
     <div>
         <a href="{{ url_for('get_restaurant', _id=restaurant.id)}}">
         <img
-            src="{{ url_for('static', path='img/' + restaurant.visual.reference_link | default('not-found.gif'))}}"
+            src="{{ url_for('static', path='img/' + restaurant.visual.reference_link | default('not-found.png'))}}"
             width="300"
             alt="{{ restaurant.visual.description }}"
             class="rounded"/>

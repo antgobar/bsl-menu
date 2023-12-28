@@ -30,12 +30,13 @@ async def post_restaurant(request: Request, db: DbSession, restaurant: Restauran
     return create_restaurant(db, restaurant)
 
 
-@router.get("/{_id}", response_model=Restaurant)
+@router.get("/{_id}", response_class=HTMLResponse)
 async def get_restaurant(request: Request, db: DbSession, _id: int):
-    result = read_restaurant(db, _id)
-    if result:
-        return result
-    raise HTTPException(status_code=404, detail=f"restaurant with id: {_id} not found")
+    restaurant = read_restaurant(db, _id)
+    return templates.TemplateResponse(
+        "restaurant_detail.html",
+        {"request": request, "restaurant": restaurant}
+    )
 
 
 @router.get("/", response_class=HTMLResponse)
@@ -78,7 +79,7 @@ def get_menu_for_restaurant(
     return read_restaurant_menu(db=db, restaurant_id=_id)
 
 
-@router.get("/search")
+@router.get("/search/")
 async def search_restaurants(
     request: Request,
     db: DbSession,

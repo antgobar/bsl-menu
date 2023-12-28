@@ -46,10 +46,8 @@ def populate_restaurants(db, visual_ids, no=3):
 
 
 def dummy_setup():
-    # db = database.SessionLocal()
-    # all_visuals = populate_visuals(db)
-    # visual_ids = [visual.id for visual in all_visuals]
-    # populate_restaurants(db, visual_ids)
+    db = database.SessionLocal()
+    populate_visuals(db)
     pass
 
 

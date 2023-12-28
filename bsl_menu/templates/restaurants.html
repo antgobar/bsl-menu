@@ -1,7 +1,9 @@
 {% if restaurants %}
+    <div class="grid">
     {% for restaurant in restaurants %}
         {% include 'restaurant_tile.html' %}
     {% endfor %}
+    </div>
 
 
 {% else %}

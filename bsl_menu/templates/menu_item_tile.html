@@ -1,0 +1,12 @@
+<div class="bg-slate-700 rounded my-2 max-w-max">
+    <div class="p-2">
+        <p class="font-bold text-gray-200">{{ menu_item.name }}</p>
+        <p class="font-bold text-gray-100">{{ menu_item.category }}</p>
+    </div>
+    <div>
+        <img
+            src="{{ url_for('static', path='img/' + menu_item.visual.reference_link | default('not-found.png'))}}"
+            width="300"
+            class="rounded"/>
+    </div>
+</div>
