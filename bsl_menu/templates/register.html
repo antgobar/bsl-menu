@@ -12,8 +12,23 @@
         <input class="px-2 py-2 max-w-96 rounded cursor-pointer bg-gray-50"
             type="date" id="restaurant-date-opened" name="restaurant-date-opened"/>
 
-        <label class="max-w-96" for="sl-visual-input">Upload sign language visual</label>
-        <input class="px-2 py-2 max-w-96 rounded cursor-pointer bg-gray-50" id="sl-visual-input" type="file">
+        <h1>Select visual</h1>
+        <div class="columns-2 ">
+             <button
+                class="max-w-96 bg-green-700 hover:bg-green-600 text-gray-200 hover:text-slate-800 px-4 py-2 my-2 rounded"
+                hx-get="{{ url_for ('visuals_search_form') }}"
+                hx-target="#visual-selection-form"
+            >From collection</button>
+
+            <button
+                class="max-w-96 bg-green-700 hover:bg-green-600 text-gray-200 hover:text-slate-800 px-4 py-2 my-2 rounded"
+                hx-get="{{ url_for ('visual_upload_form') }}"
+                hx-target="#visual-selection-form"
+            >Upload your own</button>
+        </div>
+
+
+        <div id="visual-selection-form"></div>
 
         <button
             class="max-w-24 bg-green-700 hover:bg-green-600 text-gray-200 hover:text-slate-800 px-4 py-2 my-2 rounded">

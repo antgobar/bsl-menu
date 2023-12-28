@@ -54,9 +54,23 @@ async def delete_visual(request: Request, db: DbSession, _id: int):
 async def search_visuals_by_name_view(request: Request, db: DbSession, name: str):
     visuals = search_visual_by_name(db, name, limit=10)
     return templates.TemplateResponse(
-        "visuals_search.html",
+        "visuals.html",
         {
             "request": request,
             "visuals": visuals,
         }
+    )
+
+
+@router.get("/search-form/")
+def visuals_search_form(request: Request):
+    return templates.TemplateResponse(
+        "visual_search_form.html", {"request": request}
+    )
+
+
+@router.get("/upload-form/")
+def visual_upload_form(request: Request):
+    return templates.TemplateResponse(
+        "visual_upload_form.html", {"request": request}
     )

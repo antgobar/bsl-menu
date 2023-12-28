@@ -1,18 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-<button
-    class="bg-blue-700 hover:bg-blue-600 text-gray-200 hover:text-slate-800 px-4 py-2 my-2 rounded"
-    hx-get="/restaurants?limit=4&skip=0"
-    hx-target="#main-content"
->Restaurants</button>
-<button
-    class="bg-blue-700 hover:bg-blue-600 text-gray-200 hover:text-slate-800 px-4 py-2 my-2 rounded"
-    hx-get="/visuals/search/?name=bur"
-    hx-target="#main-content"
->Visuals</button>
+<div class="inline-block bg-blue-700 hover:bg-blue-600 text-gray-200 hover:text-slate-800 px-4 py-2 my-2 rounded">
+    <a
+        href="{{ url_for('get_restaurants') }}?skip=0&limit=10"
+    >Restaurants</a>
+</div>
 <button
     class="bg-green-700 hover:bg-green-600 text-gray-200 hover:text-slate-800 px-4 py-2 my-2 rounded"
-    hx-get="/restaurants/register"
+    hx-get="{{ url_for ('register_restaurant_page') }}"
     hx-target="#main-content"
 >Register your Restaurant!
 </button>

@@ -1,0 +1,14 @@
+<form>
+    <input
+        type="search"
+        placeholder="Search visuals"
+        id="search-visuals"
+        class="rounded px-4 py-2"
+        name="name"
+        hx-get="{{ url_for('search_visuals_by_name_view') }}"
+        hx-trigger="input changed delay:500ms, search"
+        hx-target="#search-visuals-results"
+    >
+<!--    <button class="bg-slate-700 text-gray-200 px-4 py-2 rounded" type="submit" value="Search">Go</button>-->
+</form>
+<div class="my-2" id="search-visuals-results"></div>

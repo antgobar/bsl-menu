@@ -47,7 +47,7 @@ async def get_restaurants(request: Request, db: DbSession, skip: int = 0, limit:
         {
             "request": request,
             "restaurants": restaurants,
-            "skip": skip, "limit": limit, "endpoint": ENDPOINT
+            "skip": skip, "limit": limit
         }
     )
 
