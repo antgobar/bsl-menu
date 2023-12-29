@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method="POST" enctype="multipart/form-data" class="max-w-96">
+    <h1 class="my-2">Add menu item for {{ restaurant_name }}</h1>
+    <div class="grid grid-cols-1 gap-4">
+        <input class="border rounded max-w-96 px-4 py-2" type="text" id="name" name="name" placeholder="Restaurant Name" required>
+        <input class="border rounded max-w-96 px-4 py-2" type="text" id="category" name="category" placeholder="Category" required>
+        <textarea rows="4" class="border rounded max-w-96 px-4 py-2 block" name="description" placeholder="Describe your restaurant..." required></textarea>
+        {% include 'visual_form.html' %}
+        <button
+            type="submit"
+            class="border rounded max-w-24 hover:bg-green-600 px-4 py-2 my-2">
+            Register
+        </button>
+    </div>
+</form>
+{% endblock %}
