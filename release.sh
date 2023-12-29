@@ -1,1 +1,0 @@
-chmod +wx bsl_menu.db
