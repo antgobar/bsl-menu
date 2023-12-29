@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, Integer, String, ForeignKey
+from sqlalchemy import Boolean, Column, Integer, String, Date, ForeignKey
 from sqlalchemy.orm import relationship
 
 from .database import Base, engine
@@ -11,7 +11,7 @@ class Restaurant(Base):
     city = Column(String(60))
     category = Column(String(60))
     description = Column(String(120))
-    year_opened = Column(Integer)
+    date_opened = Column(Date)
     is_active = Column(Boolean, default=True)
 
     visual_id = Column(Integer, ForeignKey("visuals.id"), nullable=True)

@@ -11,21 +11,22 @@
 </head>
 <body class="bg-blue-400">
     <div class="bg-blue-200 p-4">
-
         <nav class="flex items-center gap-2">
-            <div class="border rounded text-4xl font-extrabold p-4 inline-block">
-                <a href="{{ url_for('index')}}">BSL Menu</a>
-            </div>
-            <div class="border rounded hover:bg-blue-600 px-4 py-2 my-2">
-                <a href="{{ url_for('get_restaurants') }}?skip=0&limit=10">
+            <a href="{{ url_for('index')}}">
+                <div class="border rounded text-4xl font-extrabold p-4">
+                    BSL Menu
+                </div>
+            </a>
+            <a href="{{ url_for('get_restaurants') }}?skip=0&limit=10">
+                <div class="border rounded hover:bg-blue-600 px-4 py-2 my-2">
                     View Restaurants
-                </a>
-            </div>
-            <div class="border rounded hover:bg-green-600 px-4 py-2 my-2">
-                <a href="{{ url_for('register_restaurant_page') }}">
+                </div>
+            </a>
+            <a href="{{ url_for('register_restaurant_page') }}">
+                <div class="border rounded hover:bg-green-600 px-4 py-2 my-2">
                     Register
-                </a>
-            </div>
+                </div>
+            </a>
         </nav>
         <p>Accessible menu for BSL users</p>
     </div>

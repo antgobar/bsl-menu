@@ -1,3 +1,17 @@
-<div>
-    <input class="border rounded px-2 py-2 max-w-96 rounded cursor-pointer" id="sl-visual-input" type="file" disabled>
+<div class="grid grid-cols-1 gap-4">
+    <input
+        class="border rounded max-w-96 px-4 py-2"
+        type="text" id="visual_name" name="visual_name"
+        placeholder="Visual Name" required>
+    <textarea
+        rows="4"
+        class="border rounded max-w-96 px-4 py-2 block"
+        name="visual_description"
+        placeholder="Describe your visual..." required>
+    </textarea>
+    <input
+        class="border rounded px-2 py-2 max-w-96 rounded cursor-pointer"
+        id="sl-visual-input"
+        name="visual_file"
+        type="file" required>
 </div>

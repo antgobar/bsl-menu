@@ -1,11 +1,12 @@
-<div class="border rounded shadow-md overflow-hidden">
-    <div class="relative">
-        <a href="{{ url_for('get_restaurant', _id=restaurant.id)}}">
+<a href="{{ url_for('get_restaurant', _id=restaurant.id)}}">
+    <div class="border rounded shadow-md overflow-hidden">
+        <div class="relative">
             <img class="w-96 h-full object-cover" src="{{ url_for('static', path='img/' + restaurant.visual.reference_link | default('not-found.png'))}}">
-        </a>
+        </div>
+        <div class="p-4">
+            <div class="text-lg font-medium mb-2">{{ restaurant.name }}</div>
+            <p class="text-sm">{{ restaurant.city }}</p>
+            <p class="text-sm">Opened on {{ restaurant.date_opened }}</p>
+        </div>
     </div>
-    <div class="p-4">
-        <div class="text-lg font-medium mb-2">{{ restaurant.name }}</div>
-        <p class="text-sm">{{ restaurant.city }}</p>
-    </div>
-</div>
+</a>

@@ -22,7 +22,10 @@ router = APIRouter(prefix=f"/{ENDPOINT}", tags=[ENDPOINT])
 
 @router.get("/register")
 async def register_restaurant_page(request: Request):
-    return templates.TemplateResponse("restaurant_register.html", {"request": request})
+    return templates.TemplateResponse(
+        "restaurant_register.html",
+        {"request": request}
+    )
 
 
 @router.post('/register', response_class=HTMLResponse)

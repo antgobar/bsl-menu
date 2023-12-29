@@ -1,7 +1,8 @@
 from typing import Optional
+from datetime import date
 
 from fastapi import Form
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class VisualCreate(BaseModel):
@@ -35,7 +36,7 @@ class RestaurantCreate(BaseModel):
     city: str
     category: str
     description: str
-    year_opened: int = Field(gt=0, description="Year must be greater than 0", default=1)
+    date_opened: date
     visual_id: Optional[int] = None
 
     @classmethod
@@ -45,7 +46,7 @@ class RestaurantCreate(BaseModel):
         city: str = Form(...),
         category: str = Form(...),
         description: str = Form(...),
-        year_opened: int = Form(...),
+        date_opened: date = Form(...),
         visual_id: int = Form(...),
     ):
         return cls(
@@ -53,7 +54,7 @@ class RestaurantCreate(BaseModel):
             city=city,
             category=category,
             description=description,
-            year_opened=year_opened,
+            date_opened=date_opened,
             visual_id=visual_id
         )
 
