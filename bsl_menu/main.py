@@ -31,6 +31,11 @@ async def index(request: Request, db: DbSession):
     )
 
 
+@app.get("/error")
+def create_error():
+    raise Exception("shhha")
+
+
 @app.on_event("startup")
 async def startup_event():
     dummy_setup()
