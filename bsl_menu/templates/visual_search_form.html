@@ -5,7 +5,7 @@
         id="search-visuals"
         class="border rounded px-4 py-2"
         name="name"
-        hx-get="{{ url_for('search_visuals_by_name_view') }}"
+        hx-get="/visuals/search/"
         hx-trigger="input changed delay:500ms, search"
         hx-target="#search-visuals-results"
     >

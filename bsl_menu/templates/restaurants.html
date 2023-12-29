@@ -4,6 +4,9 @@
 {% for restaurant in restaurants %}
     {% include 'restaurant_tile.html' %}
 {% endfor %}
+{% if not restaurants %}
+    No restaurants to view
+{% endif %}
 </div>
 {% include 'pagination.html' %}
 {% endblock %}

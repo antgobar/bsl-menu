@@ -24,14 +24,14 @@
         <div class="columns-2 ">
              <button
                 class="border rounded max-w-96 hover:bg-green-600 px-4 py-2"
-                hx-get="{{ url_for ('visuals_search_form') }}"
+                hx-get="/visuals/search-form/"
                 hx-target="#visual-selection-form">
                  View visuals
              </button>
 
             <button disabled
                 class="border rounded max-w-96 px-4 py-2 line-through"
-                hx-get="{{ url_for ('visual_upload_form') }}"
+                hx-get="/visuals/upload-form/"
                 hx-target="#visual-selection-form">
                 Upload your own
             </button>
