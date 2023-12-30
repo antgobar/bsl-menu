@@ -7,11 +7,12 @@
     {% if not restaurant.menu_items %}
     Nothing menu items to show
     {% endif %}
-    <a href="{{ url_for('add_menu_item_for_restaurant', restaurant_id=restaurant.id, restaurant_name=restaurant.name) }}">
-        <div class="border rounded hover:bg-green-600 px-4 py-2 my-2">
+    <a href="{{ url_for('add_menu_item_to_restaurant_form', restaurant_id=restaurant.id, restaurant_name=restaurant.name)}}">
+        <div class="border rounded text-2xl font-extrabold p-4">
             Add menu item
         </div>
     </a>
+    <div id="add-menu-item-form"></div>
     {% for category in categories %}
         <div class="border rounded bg-blue-500 my-2">
             <h1 class="text-l font-bold m-4">{{ category }}</h1>

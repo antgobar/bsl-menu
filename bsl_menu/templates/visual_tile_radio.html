@@ -1,15 +1,17 @@
 <div class="border rounded shadow-md my-2">
     <input
-        id="visual-radio-select"
+        id="{{ visual.id }}"
+        class="peer hidden"
         type="radio"
         value="{{ visual.id }}"
         name="visual_id"
     required>
-    <label for="visual-radio-select" class="relative">
+    <label for="{{ visual.id }}" class=" block cursor-pointer select-none rounded p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">
         Select {{ visual.name }}
-    </label>
-    <img
+        <img
         class="w-96 h-full"
         src="{{ url_for('static', path='img/' + visual.reference_link | default('not-found.png'))}}"
         alt="{{ visual.name }}"/>
+    </label>
+
 </div>

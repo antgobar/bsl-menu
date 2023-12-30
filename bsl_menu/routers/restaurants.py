@@ -1,7 +1,7 @@
 import os
 
-from fastapi import APIRouter, Request, HTTPException, Depends
-from fastapi.responses import HTMLResponse
+from fastapi import APIRouter, Request, HTTPException, Depends, status
+from fastapi.responses import HTMLResponse, RedirectResponse
 
 from bsl_menu.templates import templates
 from bsl_menu.schemas import Restaurant, RestaurantCreate, MenuItem, MenuItemCreate
@@ -76,6 +76,35 @@ async def delete_restaurant(request: Request, db: DbSession, _id: int):
     if result:
         return result
     raise HTTPException(status_code=404, detail=f"Restaurant with id: {_id} not found")
+
+
+@router.get("/{restaurant_id}/menu/{restaurant_name}/", response_class=HTMLResponse)
+def add_menu_item_to_restaurant_form(
+    request: Request,
+    restaurant_id: int,
+    restaurant_name: str
+):
+    return templates.TemplateResponse(
+        "menu_item_form.html",
+        {
+            "request": request,
+            "restaurant_id": restaurant_id,
+            "restaurant_name": restaurant_name
+        }
+    )
+
+
+@router.post("/{restaurant_id}/menu/{restaurant_name}/", response_class=HTMLResponse)
+def add_menu_item_to_restaurant(
+        request: Request,
+        db: DbSession,
+        restaurant_id: int,
+        restaurant_name: str,
+        menu_item: MenuItemCreate = Depends(MenuItemCreate.as_form)
+):
+    create_restaurant_menu_item(db, menu_item, restaurant_id)
+    redirect_url = request.url_for('get_restaurant', _id=restaurant_id)
+    return RedirectResponse(redirect_url, status_code=status.HTTP_303_SEE_OTHER)
 
 
 @router.post("/{_id}/menu", response_model=MenuItem)

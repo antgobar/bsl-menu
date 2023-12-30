@@ -1,0 +1,12 @@
+<div class="max-w-96">
+    <h1>Select a category</h1>
+    {% set categories = ['Starters', 'Mains', 'Dessert', 'Drinks'] %}
+    {% for category in categories %}
+    <div>
+        <input type="radio" name="category" id="{{ category }}" value="{{ category }}" class="peer hidden">
+        <label for="{{ category }}" class="block cursor-pointer select-none rounded p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">
+            {{ category }}
+        </label>
+    </div>
+    {% endfor %}
+</div>

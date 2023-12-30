@@ -21,6 +21,21 @@ class MenuItemCreate(BaseModel):
     description: str
     visual_id: Optional[int] = None
 
+    @classmethod
+    def as_form(
+        cls,
+        name: str = Form(...),
+        category: str = Form(...),
+        description: str = Form(...),
+        visual_id: int = Form(...),
+    ):
+        return cls(
+            name=name,
+            category=category,
+            description=description,
+            visual_id=visual_id
+        )
+
 
 class MenuItem(MenuItemCreate):
     id: int
