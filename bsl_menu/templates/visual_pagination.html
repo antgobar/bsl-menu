@@ -1,0 +1,16 @@
+<div class="my-2 py-2">
+    {% if skip > 0 %}
+    <a
+        class="border hover:bg-blue-600 rounded px-4 py-2 my-2"
+        href="{{ url_for('get_visuals') }}?skip={{ skip | int - limit | int }}&limit={{ limit }}">
+        &larr; Previous
+    </a>
+    {% endif %}
+    {% if visuals | length > limit %}
+    <a
+        class="border rounded hover:bg-blue-600 px-4 py-2 my-2"
+            href="{{ url_for('get_visuals') }}?skip={{ skip | int + limit | int }}&limit={{ limit }}">
+        Next &rarr;
+    </a>
+    {% endif %}
+</div>

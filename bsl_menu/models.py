@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, Integer, String, Date, ForeignKey
+from sqlalchemy import Boolean, Column, Integer, String, Date, ForeignKey, Float
 from sqlalchemy.orm import relationship
 
 from .database import Base, engine
@@ -27,6 +27,7 @@ class MenuItem(Base):
     name = Column(String, index=True)
     category = Column(String(20))
     description = Column(String(120))
+    price = Column(Float)
 
     visual_id = Column(Integer, ForeignKey("visuals.id"), nullable=True)
     visual = relationship("Visual", backref="menu_items")

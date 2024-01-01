@@ -10,7 +10,7 @@
         <label class=" max-w-96" for="restaurant-date-opened">Date opened</label>
         <input
             class="border rounded px-2 py-2 max-w-96 cursor-pointer"
-            type="date" id="restaurant-date-opened" name="date_opened" value="2018-07-22" required>
+            type="date" id="restaurant-date-opened" name="date_opened" value="{{ current_date }}" required>
         {% include 'visual_form.html' %}
         <button
             type="submit"

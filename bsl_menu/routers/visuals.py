@@ -30,9 +30,17 @@ async def get_visual(request: Request, db: DbSession, _id: int):
     raise HTTPException(status_code=404, detail=f"Visual with id: {_id} not found")
 
 
-@router.get("/", response_model=list[Visual])
+@router.get("/", response_class=HTMLResponse)
 async def get_visuals(request: Request, db: DbSession, skip: int = 0, limit: int = 100):
-    return read_visuals(db, skip=skip, limit=limit)
+    visuals = read_visuals(db, skip=skip, limit=limit)
+    return templates.TemplateResponse(
+        "visuals.html",
+        {
+            "request": request,
+            "visuals": visuals,
+            "skip": skip, "limit": limit
+        }
+    )
 
 
 @router.patch("/{_id}", response_model=Visual)
@@ -51,13 +59,14 @@ async def delete_visual(request: Request, db: DbSession, _id: int):
 
 
 @router.get("/search/", response_class=HTMLResponse)
-async def search_visuals_by_name_view(request: Request, db: DbSession, name: str):
+async def search_visuals_by_name_view(request: Request, db: DbSession, name: str, skip: int = 0, limit: int = 10):
     visuals = search_visual_by_name(db, name, limit=3)
     return templates.TemplateResponse(
-        "visuals.html",
+        "visuals_search.html",
         {
             "request": request,
             "visuals": visuals,
+            "skip": skip, "limit": limit
         }
     )
 

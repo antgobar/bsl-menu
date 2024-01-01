@@ -19,6 +19,7 @@ class MenuItemCreate(BaseModel):
     name: str
     category: str
     description: str
+    price: float
     visual_id: Optional[int] = None
 
     @classmethod
@@ -28,11 +29,13 @@ class MenuItemCreate(BaseModel):
         category: str = Form(...),
         description: str = Form(...),
         visual_id: int = Form(...),
+        price: float = Form(...)
     ):
         return cls(
             name=name,
             category=category,
             description=description,
+            price=price,
             visual_id=visual_id
         )
 

@@ -6,6 +6,8 @@
         <input class="border rounded max-w-96 px-4 py-2" type="text" id="name" name="name" placeholder="Menu item name" required>
         {% include 'menu_item_categories.html' %}
         <textarea rows="4" class="border rounded max-w-96 px-4 py-2 block" name="description" placeholder="Describe the dish" required></textarea>
+        <label for="price" class="max-w-96 px-4 py-2">Price</label>
+        <input id="price" type="number" name="price" class="rounded max-w-96 px-4 py-2">
         {% include 'visual_form.html' %}
         <button
             type="submit"

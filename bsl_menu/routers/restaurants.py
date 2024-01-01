@@ -1,4 +1,5 @@
 import os
+from datetime import date
 
 from fastapi import APIRouter, Request, HTTPException, Depends, status
 from fastapi.responses import HTMLResponse, RedirectResponse
@@ -24,7 +25,7 @@ router = APIRouter(prefix=f"/{ENDPOINT}", tags=[ENDPOINT])
 async def register_restaurant_page(request: Request):
     return templates.TemplateResponse(
         "restaurant_register.html",
-        {"request": request}
+        {"request": request, "current_date": date.today()}
     )
 
 
