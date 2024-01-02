@@ -1,4 +1,6 @@
-from fastapi import APIRouter, Request, HTTPException
+from uuid import uuid4
+
+from fastapi import APIRouter, Request, HTTPException, File, UploadFile
 from fastapi.responses import HTMLResponse
 
 from bsl_menu.schemas import Visual, VisualCreate
@@ -31,7 +33,7 @@ async def get_visual(request: Request, db: DbSession, _id: int):
 
 
 @router.get("/", response_class=HTMLResponse)
-async def get_visuals(request: Request, db: DbSession, skip: int = 0, limit: int = 100):
+async def get_visuals(request: Request, db: DbSession, skip: int = 0, limit: int = 5):
     visuals = read_visuals(db, skip=skip, limit=limit)
     return templates.TemplateResponse(
         "visuals.html",
@@ -78,8 +80,34 @@ def visuals_search_form(request: Request):
     )
 
 
-@router.get("/upload-form/")
+@router.get("/upload/")
 def visual_upload_form(request: Request):
     return templates.TemplateResponse(
         "visual_upload_form.html", {"request": request}
     )
+
+
+@router.post("/upload")
+def upload_visual(
+    request: Request,
+    db: DbSession,
+    visual_name: str,
+    visual_description: str,
+    visual_file: UploadFile = File(...),
+):
+    try:
+        filename = f"bsl_menu/static/img/{uuid4()}-{visual_file.filename}"
+        contents = visual_file.file.read()
+        with open(filename, "wb") as f:
+            f.write(contents)
+        visual = VisualCreate(
+            name=visual_name,
+            description=visual_description,
+            reference_link=filename
+        )
+        created_visual = create_visual(db, visual)
+        return {"message": f"Successfully uploaded {filename}"}
+    except Exception:
+        return {"message": "There was an error uploading the file"}
+    finally:
+        visual_file.file.close()

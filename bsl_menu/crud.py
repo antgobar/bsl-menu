@@ -40,6 +40,14 @@ def delete_entity(db: DbSession, model, entity_id: int):
     return db_entity
 
 
+def count_entities(db: DbSession, model):
+    return db.query(model).count()
+
+
+def count_restaurants(db: DbSession):
+    return count_entities(db, models.Restaurant)
+
+
 def create_restaurant(db: DbSession, restaurant: schemas.RestaurantCreate):
     return create_entity(db, models.Restaurant, restaurant)
 

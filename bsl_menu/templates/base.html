@@ -27,7 +27,7 @@
                     Restaurants
                 </div>
             </a>
-            <a href="{{ url_for('get_visuals') }}?skip=0&limit=10">
+            <a href="{{ url_for('get_visuals') }}?skip=0&limit=5">
                 <div class="border rounded hover:bg-blue-600 px-4 py-2 my-2">
                     Visuals
                 </div>
@@ -44,5 +44,12 @@
         {% block content %}
         {% endblock %}
     </div>
+    <footer class="bg-blue-200 rounded shadow m-4">
+        <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+            <span>
+                Gifs by <a class="underline" href="https://giphy.com/signwithrobert">Robert DeMayo</a>
+            </span>
+        </div>
+    </footer>
 </body>
 </html>
