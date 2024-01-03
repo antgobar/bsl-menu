@@ -5,7 +5,6 @@
     <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
     <title>BSL Menu</title>
     <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
-<!--    <script src="{{ url_for('static', path='js/htmx.min.js')}}"></script>-->
     <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
@@ -13,7 +12,7 @@
     <div class="bg-blue-200 p-4">
         <nav class="flex items-center gap-2">
             <a href="{{ url_for('index')}}">
-                <div class="border rounded text-2xl font-extrabold p-4">
+                <div class="border rounded text-xl font-extrabold p-4">
                     BSL Menu
                 </div>
             </a>
@@ -22,7 +21,7 @@
             </div>
         </nav>
         <nav class="flex items-center gap-2">
-            <a href="{{ url_for('get_restaurants') }}?skip=0&limit=10">
+            <a href="{{ url_for('get_restaurants') }}?skip=0&limit=5">
                 <div class="border rounded hover:bg-blue-600 px-4 py-2 my-2">
                     Restaurants
                 </div>
