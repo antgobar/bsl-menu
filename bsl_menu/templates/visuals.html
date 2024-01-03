@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<div id="visuals-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 {% for visual in visuals %}
     {% include 'visual_tile_radio.html' %}
 {% endfor %}

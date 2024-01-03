@@ -1,0 +1,17 @@
+<nav class="flex items-center gap-2">
+    <a href="{{ url_for('get_restaurants') }}?skip=0&limit=5">
+        <div class="border rounded-t-lg hover:bg-blue-600 px-4 py-2">
+            Restaurants
+        </div>
+    </a>
+    <a href="{{ url_for('get_visuals') }}?skip=0&limit=5">
+        <div class="border rounded-t-lg hover:bg-blue-600 px-4 py-2">
+            Visuals
+        </div>
+    </a>
+    <a href="{{ url_for('register_restaurant_page') }}">
+        <div class="border rounded-t-lg hover:bg-green-600 px-4 py-2">
+            Register
+        </div>
+    </a>
+</nav>
