@@ -1,0 +1,17 @@
+@font-face {
+    font-family: BSLFont1;
+    src: url(../fonts/ablelingo-bsl4.ttf);
+}
+
+@font-face {
+font-family: BSLFont2;
+src: url(../fonts/bsl-images-regular.ttf);
+}
+
+.bsl-font-1 {
+font-family: BSLFont1;
+}
+
+.bsl-font-2 {
+font-family: BSLFont2;
+}

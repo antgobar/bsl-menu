@@ -6,18 +6,18 @@
     <title>BSL Menu</title>
     <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-
+    <link href="{{ url_for('static', path='/css/styles.css') }}" rel="stylesheet">
 </head>
-<body class="bg-blue-400">
+<body class="bg-blue-400 max-w-screen-l">
     <div class="bg-blue-200 px-4 pyt-4">
         <nav class="flex items-center gap-2">
             <a href="{{ url_for('index')}}">
-                <div class="text-xl font-extrabold p-4">
-                    BSL Menu
+                <div class="text-xl font-extrabold p-4 bsl-font-1">
+                    bsl menu
                 </div>
             </a>
             <div>
-                <p>Accessible menu for BSL users</p>
+                <p class="bsl-font-2">Accessible menu for BSL users</p>
             </div>
         </nav>
         {% include 'navbar.html' %}
