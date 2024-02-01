@@ -8,10 +8,19 @@ font-family: BSLFont2;
 src: url(../fonts/bsl-images-regular.ttf);
 }
 
+@font-face {
+    font-family: BSLFont3;
+    src: url(../fonts/bsl-big-letters-regular.ttf);
+    }
+
 .bsl-font-1 {
 font-family: BSLFont1;
 }
 
 .bsl-font-2 {
 font-family: BSLFont2;
+}
+
+.bsl-font-3 {
+    font-family: BSLFont3;
 }
