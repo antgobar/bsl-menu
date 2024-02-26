@@ -1,4 +1,15 @@
 <nav class="flex items-center gap-2">
+    <a href="{{ url_for('index')}}">
+        <div class="text-3xl font-extrabold p-4">
+            BSL menu
+        </div>
+    </a>
+    <div>
+        <p>Accessible menu for BSL users</p>
+    </div>
+
+</nav>
+<nav class="flex items-center gap-2">
     <a href="{{ url_for('get_restaurants') }}?skip=0&limit=5">
         <div class="border rounded-t-lg hover:bg-blue-600 px-4 py-2">
             Restaurants
@@ -14,4 +25,14 @@
             Register
         </div>
     </a>
+    <div>
+        <form action="/restaurants", method="post">
+            <select name="fonts" id="fontSelector" class="px-4 py-2 text-sm rounded">
+                <option value="font-a" selected>Choose a font</option>
+                <option value="font-a">Font A</option>
+                <option value="font-b">Font B</option>
+                <option value="font-b">Font B</option>
+            </select>
+        </form>
+    </div>
 </nav>

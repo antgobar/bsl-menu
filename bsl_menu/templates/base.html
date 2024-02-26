@@ -8,20 +8,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="{{ url_for('static', path='/css/styles.css') }}" rel="stylesheet">
 </head>
-<body class="bg-blue-400 max-w-screen-l bsl-font-1">
+<body class="bg-blue-400 max-w-screen-l bsl-font-3">
     <div class="bg-blue-200 px-4 pyt-4">
-        <nav class="flex items-center gap-2">
-            <a href="{{ url_for('index')}}">
-                <div class="text-xl font-extrabold p-4 bsl-font-1">
-                    bsl menu
-                </div>
-            </a>
-            <div>
-                <p class="bsl-font-2">Accessible menu for BSL users</p>
-            </div>
-        </nav>
         {% include 'navbar.html' %}
-
     </div>
     <div id="main-content" class="m-2 p-2">
 
